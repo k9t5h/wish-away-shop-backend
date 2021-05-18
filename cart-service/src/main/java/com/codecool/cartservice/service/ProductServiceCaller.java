@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -22,12 +23,8 @@ public class ProductServiceCaller {
         this.restTemplate = restTemplate;
     }
 
-    public List<ProductDTO> getProducts(List<Long> productIds){
-        List<ProductDTO> products = new ArrayList<>();
-        for(Long productId: productIds){
-            ProductDTO productDTO = restTemplate.getForEntity(productUrl + "/" + productId, ProductDTO.class).getBody();
-            products.add(productDTO);
-        }
-        return products;
+    public List<ProductDTO> getProducts(List<Long> productIds) {
+        return Arrays.asList(restTemplate.postForEntity(productUrl + "/list", productIds, ProductDTO[].class).getBody());
+
     }
 }
