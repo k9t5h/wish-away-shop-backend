@@ -3,14 +3,13 @@ package com.codecool.cartservice.service;
 import com.codecool.cartservice.model.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class ProductServiceCaller {
 
     private RestTemplate restTemplate;
