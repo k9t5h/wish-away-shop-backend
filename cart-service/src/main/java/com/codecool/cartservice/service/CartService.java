@@ -1,6 +1,7 @@
 package com.codecool.cartservice.service;
 
 import com.codecool.cartservice.model.Cart;
+import com.codecool.cartservice.model.ProductDTO;
 import com.codecool.cartservice.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ import java.util.List;
 public class CartService {
 
     private CartRepository cartRepository;
+    private ProductServiceCaller productServiceCaller;
 
     @Autowired
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, ProductServiceCaller productServiceCaller) {
         this.cartRepository = cartRepository;
+        this.productServiceCaller = productServiceCaller;
     }
 
     public Cart getCart() {
@@ -44,7 +47,8 @@ public class CartService {
 
     public Cart getCartWithProducts() {
         Cart cart = getCart();
-        
+        List<ProductDTO> products = productServiceCaller.getProducts(cart.getProductIds());
+        cart.setProducts(products);
         return cart;
     }
 }
