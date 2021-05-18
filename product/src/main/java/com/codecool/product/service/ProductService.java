@@ -21,12 +21,12 @@ public class ProductService {
     }
 
     public List<Product> findAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAllBySoldFalse();
     }
 
     public List<Product> findProductsByCategory(String categoryName) {
         Category category = Category.valueOf(categoryName);
-        return productRepository.findAllByCategory(category);
+        return productRepository.findAllByCategoryAndSoldFalse(category);
     }
 
     public Product findProductById(Long id) {
