@@ -6,6 +6,7 @@ import com.codecool.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -45,6 +46,15 @@ public class ProductService {
         Product product = findProductById(id);
         product.setSold(true);
         productRepository.save(product);
+    }
+
+    public List<Product> findProductsByIdList(List<Long> productIDs) {
+        List<Product> foundProducts = new ArrayList<>();
+        for (Long productID : productIDs) {
+            Product product = findProductById(productID);
+            foundProducts.add(product);
+        }
+        return foundProducts;
     }
 
 }

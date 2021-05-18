@@ -51,4 +51,9 @@ public class ProductController {
         return Category.values();
     }
 
+    @PostMapping("/list")
+    public List<Product> getProductsByIdList(@RequestBody List<Long> productIDs) {
+        return productService.findProductsByIdList(productIDs);
+    }
+
 }
