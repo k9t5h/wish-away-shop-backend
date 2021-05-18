@@ -67,4 +67,24 @@ class CartServiceTest {
         assertEquals(3, cartResult.getProducts().size());
     }
 
+    @Test
+    public void addProductToCart_addOneToEmptyCart_returnsCartWithProductId(){
+        Cart cart = Cart.builder().productIds(new ArrayList<>()).build();
+        Cart cartResult = cartService.addProductToCart(1L);
+        assertEquals(1L, cartResult.getProductIds().get(0));
+    }
+
+    @Test
+    public void addProductToCart_addIdTwice_returnCartWithOneElement(){
+        Cart cart = Cart.builder().productIds(new ArrayList<>()).build();
+        when(mockCartRepository.findAll()).thenReturn(List.of(cart));
+        List<Long> ids = List.of(1L, 2L);
+        cartService.addProductToCart(ids.get(0));
+        cartService.addProductToCart(ids.get(1));
+        Cart cartResult = cartService.addProductToCart(ids.get(0));
+        assertEquals(ids, cartResult.getProductIds());
+
+
+    }
+
 }
