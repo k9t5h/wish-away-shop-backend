@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -37,7 +38,7 @@ public class CartServiceApplication {
 	@Bean
 	public CommandLineRunner init() {
 		return args -> {
-			Cart cart = Cart.builder().productIds(new ArrayList<>()).products(new ArrayList<>()).build();
+			Cart cart = Cart.builder().productIds(List.of(1L)).products(new ArrayList<>()).build();
 			cartRepository.save(cart);
 		};
 
