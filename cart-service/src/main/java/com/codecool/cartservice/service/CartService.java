@@ -32,7 +32,7 @@ public class CartService {
             productIds.add(productId);
             cartRepository.save(cart);
         }
-        return cart;
+        return getCartWithProducts();
     }
 
     public void removeProductFromCart(long productId) {
