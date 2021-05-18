@@ -43,6 +43,7 @@ public class CartService {
     public void emptyCart() {
         Cart cart = getCart();
         cart.setProductIds(new ArrayList<>());
+        cartRepository.save(cart);
     }
 
     public Cart getCartWithProducts() {
