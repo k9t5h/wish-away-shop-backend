@@ -28,8 +28,10 @@ public class CartService {
     public Cart addProductToCart(long productId) {
         Cart cart = getCart();
         List<Long> productIds = cart.getProductIds();
-        productIds.add(productId);
-        cartRepository.save(cart);
+        if(!productIds.contains(productId)){
+            productIds.add(productId);
+            cartRepository.save(cart);
+        }
         return cart;
     }
 
