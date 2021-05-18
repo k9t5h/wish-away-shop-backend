@@ -16,7 +16,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = {"", "/"})
     public Cart getCart() {
         return cartService.getCartWithProducts();
     }
