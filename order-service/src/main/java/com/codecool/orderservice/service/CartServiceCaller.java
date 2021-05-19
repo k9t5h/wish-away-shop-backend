@@ -13,8 +13,6 @@ public class CartServiceCaller {
 
     @Value("${cart-service.url}")
     private String cartUrl;
-    @Value("${product-service.url}")
-    private String productUrl;
 
     @Autowired
     public CartServiceCaller(RestTemplate restTemplate) {
