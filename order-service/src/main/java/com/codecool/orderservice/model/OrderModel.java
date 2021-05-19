@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Order {
+public class OrderModel {
 
     @Id
     @GeneratedValue

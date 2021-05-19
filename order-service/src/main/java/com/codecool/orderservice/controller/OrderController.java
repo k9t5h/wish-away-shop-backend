@@ -1,6 +1,6 @@
 package com.codecool.orderservice.controller;
 
-import com.codecool.orderservice.model.Order;
+import com.codecool.orderservice.model.OrderModel;
 import com.codecool.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,8 @@ public class OrderController {
     }
 
     @PostMapping(path={"", "/"})
-    public Order placeOrder(@RequestBody Order order){
-        Order savedOrder = orderService.saveOrder(order);
+    public OrderModel placeOrder(@RequestBody OrderModel order){
+        OrderModel savedOrder = orderService.saveOrder(order);
         return savedOrder;
 
     }
