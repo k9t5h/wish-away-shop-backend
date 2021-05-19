@@ -21,6 +21,10 @@ public class OrderController {
     public OrderModel placeOrder(@RequestBody OrderModel order){
         OrderModel savedOrder = orderService.saveOrder(order);
         return savedOrder;
+    }
 
+    @GetMapping(path = "/order/{id}")
+    public OrderModel getOrderById(@PathVariable(name = "id") long id){
+        return orderService.getOderById(id);
     }
 }
