@@ -30,6 +30,8 @@ public class OrderService {
         order.setProducts(cart.getProducts());
         order.setProductIds(cart.getProducts().stream().map(ProductDTO::getId).collect(Collectors.toList()));
         orderRepository.save(order);
+        cartServiceCaller.emptyCart();
+        productServiceCaller.markProductAsSold(order.getProductIds());
         return order;
     }
 
