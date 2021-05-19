@@ -23,4 +23,8 @@ public class CartServiceCaller {
         return restTemplate.getForEntity(cartUrl, CartDTO.class).getBody();
     }
 
+    public void emptyCart(){
+        restTemplate.put(cartUrl + "/empty", null);
+    }
+
 }
