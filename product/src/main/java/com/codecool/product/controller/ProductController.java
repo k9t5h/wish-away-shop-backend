@@ -30,7 +30,7 @@ public class ProductController {
         return productService.findProductById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Product addNewProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
