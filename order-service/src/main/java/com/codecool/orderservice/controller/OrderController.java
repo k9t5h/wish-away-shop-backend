@@ -23,7 +23,7 @@ public class OrderController {
         return savedOrder;
     }
 
-    @GetMapping(path = "/order/{id}")
+    @GetMapping(path = "/{id}")
     public OrderModel getOrderById(@PathVariable(name = "id") long id){
         return orderService.getOderById(id);
     }
