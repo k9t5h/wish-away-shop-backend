@@ -22,7 +22,7 @@ public class ProductServiceCaller {
         this.restTemplate = restTemplate;
     }
 
-    private List<ProductDTO> getProducts(List<Long> productIds){
+    public List<ProductDTO> getProducts(List<Long> productIds){
         return Arrays.asList(restTemplate.postForEntity(productUrl + "/list", productIds, ProductDTO[].class).getBody());
     }
 }
