@@ -7,6 +7,8 @@ import com.codecool.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,11 +16,13 @@ public class OrderService {
 
     private OrderRepository orderRepository;
     private CartServiceCaller cartServiceCaller;
+    private ProductServiceCaller productServiceCaller;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, CartServiceCaller cartServiceCaller) {
+    public OrderService(OrderRepository orderRepository, CartServiceCaller cartServiceCaller, ProductServiceCaller productServiceCaller) {
         this.orderRepository = orderRepository;
         this.cartServiceCaller = cartServiceCaller;
+        this.productServiceCaller = productServiceCaller;
     }
 
     public OrderModel saveOrder(OrderModel order) {
@@ -26,6 +30,13 @@ public class OrderService {
         order.setProducts(cart.getProducts());
         order.setProductIds(cart.getProducts().stream().map(ProductDTO::getId).collect(Collectors.toList()));
         orderRepository.save(order);
+        return order;
+    }
+
+    public OrderModel getOderById(long id) {
+        OrderModel order = orderRepository.findById(id).orElseThrow(() ->new NoSuchElementException("Order with id " + id + " not found."));
+        List<ProductDTO> products = productServiceCaller.getProducts(order.getProductIds());
+        order.setProducts(products);
         return order;
     }
 }
