@@ -25,4 +25,10 @@ public class ProductServiceCaller {
     public List<ProductDTO> getProducts(List<Long> productIds){
         return Arrays.asList(restTemplate.postForEntity(productUrl + "/list", productIds, ProductDTO[].class).getBody());
     }
+
+    public void markProductAsSold(List<Long> productIds) {
+        for(Long productId: productIds){
+            restTemplate.put(productUrl + "/" + productId + "/sold", null);
+        }
+    }
 }
