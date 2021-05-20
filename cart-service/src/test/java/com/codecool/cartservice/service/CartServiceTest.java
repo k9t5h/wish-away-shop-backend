@@ -37,8 +37,8 @@ class CartServiceTest {
     public void getCartWithProducts_cartWithOneProductId_returnsCartWithOneProduct(){
         Cart cart = Cart.builder().productIds(Collections.singletonList(1L)).build();
         ProductDTO testProduct = ProductDTO.builder().id(1L).description("test product").build();
-        when(mockCartRepository.findAll()).thenReturn(List.of(cart));
-        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(List.of(testProduct));
+        when(mockCartRepository.findAll()).thenReturn(Arrays.asList(cart));
+        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(Arrays.asList(testProduct));
         Cart cartResult = cartService.getCartWithProducts();
         assertEquals(cart, cartResult);
         assertEquals(testProduct, cartResult.getProducts().get(0));
@@ -47,8 +47,8 @@ class CartServiceTest {
     @Test
     public void getCartWithProducts_cartWithNoProductId_returnsCartWithNoProducts(){
         Cart cart = Cart.builder().productIds(new ArrayList<>()).build();
-        when(mockCartRepository.findAll()).thenReturn(List.of(cart));
-        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(List.of());
+        when(mockCartRepository.findAll()).thenReturn(Arrays.asList(cart));
+        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(Arrays.asList());
         Cart cartResult = cartService.getCartWithProducts();
         assertEquals(cart, cartResult);
         assertEquals(0, cartResult.getProducts().size());
@@ -59,9 +59,9 @@ class CartServiceTest {
         ProductDTO testProduct1 = ProductDTO.builder().id(1L).description("test product 1").build();
         ProductDTO testProduct2 = ProductDTO.builder().id(2L).description("test product 2").build();
         ProductDTO testProduct3 = ProductDTO.builder().id(3L).description("test product 3").build();
-        Cart cart = Cart.builder().productIds(List.of(testProduct1.getId(), testProduct2.getId(), testProduct3.getId())).build();
-        when(mockCartRepository.findAll()).thenReturn(List.of(cart));
-        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(List.of(testProduct1, testProduct2, testProduct3));
+        Cart cart = Cart.builder().productIds(Arrays.asList(testProduct1.getId(), testProduct2.getId(), testProduct3.getId())).build();
+        when(mockCartRepository.findAll()).thenReturn(Arrays.asList(cart));
+        when(mockProductServiceCaller.getProducts(cart.getProductIds())).thenReturn(Arrays.asList(testProduct1, testProduct2, testProduct3));
         Cart cartResult = cartService.getCartWithProducts();
         assertEquals(cart, cartResult);
         assertEquals(3, cartResult.getProducts().size());
@@ -77,8 +77,8 @@ class CartServiceTest {
     @Test
     public void addProductToCart_addIdTwice_returnCartWithOneElement(){
         Cart cart = Cart.builder().productIds(new ArrayList<>()).build();
-        when(mockCartRepository.findAll()).thenReturn(List.of(cart));
-        List<Long> ids = List.of(1L, 2L);
+        when(mockCartRepository.findAll()).thenReturn(Arrays.asList(cart));
+        List<Long> ids = Arrays.asList(1L, 2L);
         cartService.addProductToCart(ids.get(0));
         cartService.addProductToCart(ids.get(1));
         Cart cartResult = cartService.addProductToCart(ids.get(0));
